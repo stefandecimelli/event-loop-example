@@ -23,7 +23,7 @@ class ChannelController {
 
     public start = async (callback: Function) => {
         this.on(MAIN_CHANNEL, () => setTimeout(() => this.emit(MAIN_CHANNEL), INTERVAL));
-        this.on(MAIN_CHANNEL, () => callback(this.emit));
+        this.on(MAIN_CHANNEL, () => callback(this));
         this.emit(MAIN_CHANNEL);
     }
 
