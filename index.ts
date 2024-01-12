@@ -1,7 +1,7 @@
 import { events, state } from "./events"
 
 events.on("increment", () => {
-    state.value = (state.value || 0) + Math.random()
+    state.value = (state.value || 0) + 150
     events.emit("checkstate")
 })
 
@@ -13,7 +13,6 @@ events.on("checkstate", () => {
 
 events.start(() => {
 
-    events.emit("increment")
     events.emit("increment")
 
     console.log("Value from state:")

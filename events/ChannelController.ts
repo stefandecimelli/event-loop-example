@@ -1,11 +1,11 @@
-const INTERVAL = 0;
+const INTERVAL = 50;
 const MAIN_CHANNEL = Math.random().toString(36)
 
 class ChannelController {
     private channels: { [key: string]: Function[] } = {};
 
     public on(eventType: string, callback: Function) {
-        if(callback) {
+        if (callback) {
             this.channels[eventType] = this.channels[eventType] || []
             this.channels[eventType].push(callback);
         }
@@ -21,7 +21,7 @@ class ChannelController {
         this.channels[eventType].forEach(callback => callback());
     }
 
-    public start = (callback: Function) => {
+    public start(callback: Function) {
         this.on(MAIN_CHANNEL, () => setTimeout(() => this.emit(MAIN_CHANNEL), INTERVAL));
         this.on(MAIN_CHANNEL, () => callback());
         this.emit(MAIN_CHANNEL);
