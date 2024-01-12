@@ -12,10 +12,6 @@ events.on("checkstate", () => {
 })
 
 events.start(() => {
-
     events.emit("increment")
-
-    console.log("Value from state:")
-    console.log(state.value)
-
+    console.log("Value from state: " + state.value)
 })

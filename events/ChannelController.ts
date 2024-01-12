@@ -1,4 +1,3 @@
-const INTERVAL = 50;
 const MAIN_CHANNEL = Math.random().toString(36)
 
 class ChannelController {
@@ -22,8 +21,8 @@ class ChannelController {
     }
 
     public start(callback: Function) {
-        this.on(MAIN_CHANNEL, () => setTimeout(() => this.emit(MAIN_CHANNEL), INTERVAL));
         this.on(MAIN_CHANNEL, () => callback());
+        this.on(MAIN_CHANNEL, () => setImmediate(() => this.emit(MAIN_CHANNEL)));
         this.emit(MAIN_CHANNEL);
     }
 
