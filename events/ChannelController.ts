@@ -1,4 +1,5 @@
 const INTERVAL = 50;
+const MAIN_CHANNEL = Math.random().toString(36)
 
 class ChannelController {
     private channels: {[key: string]: Function[]};
@@ -20,10 +21,9 @@ class ChannelController {
     }
 
     start = async (callback: Function) => {
-        const mainChanel = Math.random().toString(36)
-        this.on(mainChanel, () => setTimeout(() => this.emit(mainChanel), INTERVAL));
-        this.on(mainChanel, () => callback());
-        this.emit(mainChanel);
+        this.on(MAIN_CHANNEL, () => setTimeout(() => this.emit(MAIN_CHANNEL), INTERVAL));
+        this.on(MAIN_CHANNEL, () => callback());
+        this.emit(MAIN_CHANNEL);
     }
 
 }
