@@ -1,4 +1,4 @@
-const INTERVAL = 50;
+const INTERVAL = 0;
 const MAIN_CHANNEL = Math.random().toString(36)
 
 class ChannelController {
