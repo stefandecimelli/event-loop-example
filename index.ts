@@ -1,4 +1,4 @@
-import { events, state } from "./src/events.js";
+import { events, state } from "./events";
 
 events.on("increment", () => {
     state.value = (state.value || 0) + 1;
