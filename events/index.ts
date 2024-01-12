@@ -1,2 +1,3 @@
-import { events, state } from "./events-wrapper";
-export { events, state };
+import e from "./ChannelController.js";
+export const events = e;
+export const state: any = {}; 
