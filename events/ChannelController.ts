@@ -4,7 +4,7 @@ const MAIN_CHANNEL = Math.random().toString(36)
 class ChannelController {
     private channels: { [key: string]: Function[] } = {};
 
-    public on(eventType: string, callback: (emit: ChannelController) => void) {
+    public on(eventType: string, callback: Function) {
         if(callback) {
             this.channels[eventType] = this.channels[eventType] || []
             this.channels[eventType].push(callback);
@@ -18,12 +18,12 @@ class ChannelController {
         if (!this.channels[eventType]) {
             throw new Error("No such channel: " + eventType);
         }
-        this.channels[eventType].forEach(callback => callback(this));
+        this.channels[eventType].forEach(callback => callback());
     }
 
-    public start = async (callback: Function) => {
+    public start = (callback: Function) => {
         this.on(MAIN_CHANNEL, () => setTimeout(() => this.emit(MAIN_CHANNEL), INTERVAL));
-        this.on(MAIN_CHANNEL, () => callback(this));
+        this.on(MAIN_CHANNEL, () => callback());
         this.emit(MAIN_CHANNEL);
     }
 

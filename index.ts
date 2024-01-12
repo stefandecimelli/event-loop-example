@@ -1,6 +1,6 @@
 import { events, state } from "./events"
 
-events.on("increment", (events) => {
+events.on("increment", () => {
     state.value = (state.value || 0) + Math.random()
     events.emit("checkstate")
 })
