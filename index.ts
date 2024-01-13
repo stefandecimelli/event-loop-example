@@ -1,13 +1,13 @@
 import { events, state } from "./events"
 
 events.on("increment", () => {
-    state.value = (state.value || 0) + 150
+    state.value = (state.value || 0) + 175
     events.emit("checkstate")
 })
 
 events.on("checkstate", () => {
     if (state.value >= 10_000) {
-        state.value = 0
+        state.value = state.value - 10_000
     }
 })
 

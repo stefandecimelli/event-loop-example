@@ -1,31 +1,28 @@
 const MAIN_CHANNEL = Math.random().toString(36)
 
-class ChannelController {
-    private channels: { [key: string]: Function[] } = {};
+const channels: { [key: string]: Function[] } = {};
 
-    public on(eventType: string, callback: Function) {
-        if (callback) {
-            this.channels[eventType] = this.channels[eventType] || []
-            this.channels[eventType].push(callback);
-        }
-        else {
-            throw new Error("Uncallable function: " + callback);
-        }
+function on(eventType: string, callback: Function) {
+    if (callback) {
+        channels[eventType] = channels[eventType] || []
+        channels[eventType].push(callback);
     }
-
-    public emit(eventType: string) {
-        if (!this.channels[eventType]) {
-            throw new Error("No such channel: " + eventType);
-        }
-        this.channels[eventType].forEach(callback => callback());
+    else {
+        throw new Error("Uncallable function: " + callback);
     }
-
-    public start(callback: Function) {
-        this.on(MAIN_CHANNEL, () => callback());
-        this.on(MAIN_CHANNEL, () => setImmediate(() => this.emit(MAIN_CHANNEL)));
-        this.emit(MAIN_CHANNEL);
-    }
-
 }
 
-export default ChannelController;
+function emit(eventType: string) {
+    if (!channels[eventType]) {
+        throw new Error("No such channel: " + eventType);
+    }
+    channels[eventType].forEach(callback => callback());
+}
+
+function start(callback: Function) {
+    on(MAIN_CHANNEL, () => callback());
+    on(MAIN_CHANNEL, () => setImmediate(() => emit(MAIN_CHANNEL)));
+    emit(MAIN_CHANNEL);
+}
+
+export default { on, emit, start };
